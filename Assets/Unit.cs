@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Client {
     struct Unit {
-        public Vector3 Position;
+        public Transform UnitTransform;
+        public Vector3 Velocity;
     }
 }
