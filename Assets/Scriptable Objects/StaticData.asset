@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7391b1654f5bb3c48a8bc832f07bc65a, type: 3}
   m_Name: StaticData
   m_EditorClassIdentifier: 
-  UnitObject: {fileID: 0}
+  UnitObject: {fileID: 5262450282435533230, guid: 6bd21e3864bcbb9408294f555effc719, type: 3}

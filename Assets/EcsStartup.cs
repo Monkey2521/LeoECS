@@ -16,7 +16,7 @@ namespace Client {
             #endif
 
             _systems
-                .Add (new EcsInitSystem())
+                .Add (new UnitInitSystem())
                 // register your systems here, for example:
                 // .Add (new TestSystem1 ())
                 // .Add (new TestSystem2 ())
