@@ -4,4 +4,8 @@ using UnityEngine;
 public class StaticData : ScriptableObject
 {
     public GameObject UnitPrefab;
+
+    public int N;
+
+    public int UnitCount;
 }

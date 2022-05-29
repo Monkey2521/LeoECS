@@ -9,16 +9,22 @@ namespace Client {
         private SceneData sceneData;
         
         public void Init () {
-            EcsEntity unitEntity = _world.NewEntity();
 
-            ref var unit = ref unitEntity.Get<Unit>();
+            for(int i = 0; i < staticData.UnitCount; i ++)
+            {
+                EcsEntity unitEntity = _world.NewEntity();
+                ref var unit = ref unitEntity.Get<Unit>();
 
-            GameObject unitGO = Object.Instantiate(staticData.UnitPrefab);
+                int randIntX = Random.Range(-staticData.N, staticData.N);
+                int randIntZ = Random.Range(-staticData.N, staticData.N);
 
-            unit.UnitTransform = unitGO.transform;
-            unit.Velocity = Vector3.right;
+                GameObject unitGO = Object.Instantiate(staticData.UnitPrefab, new Vector3(randIntX, 0, randIntZ), Quaternion.identity);
 
-            sceneData.UnitPosition = unitGO.transform;
+                unit.UnitTransform = unitGO.transform;
+                unit.Velocity = Vector3.right;
+
+                sceneData.UnitPosition = unitGO.transform;
+            }
         }
     }
 }
