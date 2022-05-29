@@ -27,7 +27,8 @@ namespace Client {
                         .Inject(sceneData);
 
             _fixedUpdateSystems
-                .Add(new UnitMoveSystem()); // добавляем систему движения
+                .Add(new UnitMoveSystem())
+                .Inject(sceneData);
 
             _systems.Init();
             _fixedUpdateSystems.Init();

@@ -3,9 +3,10 @@ using UnityEngine;
 
 namespace Client
 {
-    internal class UnitMoveSystem : IEcsSystem
+    internal class UnitMoveSystem : IEcsSystem, IEcsRunSystem
     {
         private EcsFilter<Unit> filter;
+        private SceneData sceneData;
 
         public void Run()
         {
@@ -13,11 +14,7 @@ namespace Client
             {
                 ref var unit = ref filter.Get1(i);
 
-                Vector3 direction = new Vector3(
-                    unit.UnitTransform.position.x * unit.Velocity.x
-                    , unit.UnitTransform.position.y * unit.Velocity.y
-                    , unit.UnitTransform.position.z * unit.Velocity.z)
-                    .normalized;
+                Vector3 direction = (unit.UnitTransform.position + unit.Velocity).normalized;
 
                 unit.UnitTransform.position += direction * Time.fixedDeltaTime;
             }
