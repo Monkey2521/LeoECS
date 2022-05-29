@@ -1,14 +1,16 @@
 using Leopotam.Ecs;
 
 namespace Client {
-    sealed class EcsInitSystem : IEcsInitSystem {
+    sealed class EcsInitSystem : IEcsInitSystem
+    {
         readonly EcsWorld _world = null;
         
-        public void Init () {
-            EcsEntity testEntity = _world.NewEntity();
+        private EcsFilter<EcsComponent> _filter;
 
-            ref var entity = ref testEntity.Get<EcsComponent>();
+        void IEcsInitSystem.Init()
+        {
 
         }
+
     }
 }
