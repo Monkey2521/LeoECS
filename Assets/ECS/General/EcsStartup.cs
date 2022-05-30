@@ -4,56 +4,64 @@ using UnityEngine;
 namespace Client {
     sealed class EcsStartup : MonoBehaviour {
         EcsWorld _world;
-        EcsSystems _systems;
 
-        public StaticData staticData;
+        EcsSystems _updateSystems;
+        EcsSystems _fixedUpdateSystems;
+
+        public UnitSpawningData unitSpawningData;
+        public UnitStatsData unitStatsData; 
+
         public SceneData sceneData;
-        private EcsSystems _fixedUpdateSystems; // новая группа систем
 
         void Start () {          
             _world = new EcsWorld ();
-            _systems = new EcsSystems (_world);
+            _updateSystems = new EcsSystems (_world);
             _fixedUpdateSystems = new EcsSystems(_world);
 
-#if UNITY_EDITOR
+            #if UNITY_EDITOR
             Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_world);
-            Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_systems);
+            Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_updateSystems);
             Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_fixedUpdateSystems);
-#endif
+            #endif
 
-            _systems
+            _updateSystems
                         .Add(new UnitInitSystem())
-                        .Inject(staticData)
+                        .Add(new HealthScalerSystem())
+                        .Inject(unitSpawningData)
+                        .Inject(unitStatsData)
                         .Inject(sceneData);
 
             _fixedUpdateSystems
                 .Add(new UnitMoveSystem())
                 .Inject(sceneData);
 
-            _systems.Init();
+            _updateSystems.Init();
             _fixedUpdateSystems.Init();
         }
 
         void Update () {
-            _systems?.Run ();
+            _updateSystems?.Run ();
         }
 
-        private void FixedUpdate()
+        void FixedUpdate()
         {
             _fixedUpdateSystems?.Run();
         }
 
         void OnDestroy () {
-            if (_systems != null) {
-                _systems.Destroy ();
-                _systems = null;
+            if (_updateSystems != null) {
+                _updateSystems.Destroy ();
+                _updateSystems = null;
+            }
 
+            if (_fixedUpdateSystems != null)
+            {
                 _fixedUpdateSystems.Destroy();
                 _fixedUpdateSystems = null;
-
-                _world.Destroy ();
-                _world = null;
             }
+
+            _world.Destroy();
+            _world = null;
         }
     }
 }
