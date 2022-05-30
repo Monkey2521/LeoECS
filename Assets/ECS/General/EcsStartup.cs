@@ -8,9 +8,11 @@ namespace Client {
         EcsSystems _updateSystems;
         EcsSystems _fixedUpdateSystems;
 
+        [Header("Unit settings")]
         public UnitSpawningData unitSpawningData;
-        public UnitStatsData unitStatsData; 
+        public UnitStatsData unitStatsData;
 
+        [Header("Settings")]
         public SceneData sceneData;
 
         void Start () {          
@@ -33,6 +35,7 @@ namespace Client {
 
             _fixedUpdateSystems
                 .Add(new UnitMoveSystem())
+                .Add(new BounceSystem())
                 .Inject(sceneData);
 
             _updateSystems.Init();

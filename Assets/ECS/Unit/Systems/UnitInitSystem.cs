@@ -8,23 +8,31 @@ namespace Client {
 
         UnitSpawningData _spawnData;
         UnitStatsData _statsData;
+        SceneData _sceneData;
 
         public void Init () {
-
             for (int index = 0; index < _spawnData.TeamCount; index++)
             {
+                Transform currentTeamParent = Object.Instantiate
+                    (
+                        new GameObject(_spawnData.SpawningData[index].team.ToString() + " team"), 
+                        _sceneData.UnitParent
+                    ).transform;
+
                 for (int i = 0; i < _spawnData.MaxUnitsInTeam; i++)
                 {
                     EcsEntity unitEntity = _world.NewEntity();
 
                     ref var unit = ref unitEntity.Get<Unit>();
                     ref var unitHealth = ref unitEntity.Get<Health>();
+                    ref var unitBounce = ref unitEntity.Get<Bounce>();
 
                     GameObject unitGO = Object.Instantiate
                         (
-                            _spawnData.UnitPrefab, 
-                            GetNearbyPosition(_spawnData.SpawningData[index].SpawnPoint), 
-                            Quaternion.identity
+                            _spawnData.UnitPrefab,
+                            GetNearbyPosition(_spawnData.SpawningData[index].SpawnPoint),
+                            Quaternion.identity,
+                            currentTeamParent
                         );
 
                     unit.transform = unitGO.transform;
@@ -54,6 +62,9 @@ namespace Client {
 
                     unitHealth.HP = _statsData.HealthPoints;
                     unitHealth.MaxHP = _statsData.MaxHealthPoints;
+
+                    unitBounce.rigidbody = unitGO.GetComponent<Rigidbody>();
+                    unitBounce.force = _statsData.BounceForce;
                 }
             }
         }

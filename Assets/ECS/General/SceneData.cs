@@ -4,5 +4,7 @@ using UnityEngine;
 
 public class SceneData : MonoBehaviour
 {
-    public Transform UnitPosition;
+    public Transform UnitParent;
+    public float RayDistance;
+    public LayerMask Layer;
 }

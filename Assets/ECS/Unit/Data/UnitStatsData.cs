@@ -8,4 +8,6 @@ public sealed class UnitStatsData : ScriptableObject
 
     public int HealthPoints;
     public int MaxHealthPoints;
+
+    public int BounceForce;
 }
