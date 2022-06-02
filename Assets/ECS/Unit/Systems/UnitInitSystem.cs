@@ -28,11 +28,11 @@ namespace Client
                     EcsEntity unitEntity = _world.NewEntity();
 
                     ref var unit = ref unitEntity.Get<Unit>();
-                    ref var unitHealth = ref unitEntity.Get<Health>();
+                    ref var unitHealth = ref unitEntity.Get<HealthComponent>();
+                    ref var unitScale = ref unitEntity.Get<ScaleComponent>();
+                    ref var unitGrounded = ref unitEntity.Get<IsGroundedComponent>();
                     ref var unitBounceable = ref unitEntity.Get<Bounceable>();
                     ref var unitMoveable = ref unitEntity.Get<Moveable>();
-                    ref var unitScale = ref unitEntity.Get<Scale>();
-                    ref var unitGrounded = ref unitEntity.Get<IsGrounded>();
 
                     GameObject unitGO = Object.Instantiate
                         (
@@ -44,7 +44,6 @@ namespace Client
 
                     unitGO.GetComponent<CollisionChecker>().ecsWorld = _world;
 
-                    unit.transform = unitGO.transform;
                     unit.team = _spawnData.SpawningData[index].Team;
                     unit.material = unitGO.GetComponent<MeshRenderer>().material;
 
@@ -74,10 +73,11 @@ namespace Client
                     unitBounceable.force = _statsData.BounceForce;
 
                     unitMoveable.speed = _statsData.Speed;
+                    unitMoveable.SetTransform(unitGO.transform);
 
-                    unitScale.SetTransform(unit.transform);
+                    unitScale.SetTransform(unitGO.transform);
 
-                    unitGrounded.SetTransform(unit.transform);
+                    unitGrounded.SetTransform(unitGO.transform);
                 }
             }
         }

@@ -7,7 +7,7 @@ namespace Client
     {
         SceneData _sceneData;
 
-        EcsFilter<IsGrounded> _filter;
+        EcsFilter<IsGroundedComponent> _filter;
         
         void IEcsRunSystem.Run () {
             foreach (var i in _filter)

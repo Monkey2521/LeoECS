@@ -2,14 +2,13 @@ using UnityEngine;
 
 namespace Client 
 {
-    struct Scale 
+    struct IsGroundedComponent 
     {
         Transform _transform;
-        public Vector3 scale
-        {
-            get => _transform.localScale;
-            set => _transform.localScale = value;
-        }
+
+        public Vector3 Position => _transform.position;
+        public float XScale => _transform.localScale.x;
+        public bool grounded;
 
         public bool SetTransform(Transform transform)
         {

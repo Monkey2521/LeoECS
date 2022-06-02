@@ -1,6 +1,6 @@
 namespace Client
 {
-    struct Health 
+    struct HealthComponent 
     {
         public float HP;
         public float MaxHP;

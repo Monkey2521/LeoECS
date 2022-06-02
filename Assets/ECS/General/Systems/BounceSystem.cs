@@ -5,7 +5,7 @@ namespace Client
 {
     sealed class BounceSystem : IEcsRunSystem 
     {
-        EcsFilter<Bounceable, IsGrounded> _filter;
+        EcsFilter<Bounceable, IsGroundedComponent> _filter;
         SceneData _sceneData;
 
         void IEcsRunSystem.Run()
