@@ -12,16 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdceba0db3da78c448e9eea04c1b615b, type: 3}
   m_Name: UnitSpawningData
   m_EditorClassIdentifier: 
-  UnitPrefab: {fileID: 5262450282435533230, guid: 6bd21e3864bcbb9408294f555effc719, type: 3}
-  MaxUnitsInTeam: 5
-  TeamCount: 4
-  SpawningData:
-  - SpawnPoint: {x: -15, y: 1, z: 15}
-    team: 0
-  - SpawnPoint: {x: -15, y: 1, z: -15}
-    team: 1
-  - SpawnPoint: {x: 15, y: 1, z: -15}
-    team: 2
-  - SpawnPoint: {x: 15, y: 1, z: 15}
-    team: 3
-  SpawnSpreading: 5
+  _unitPrefab: {fileID: 5262450282435533230, guid: 6bd21e3864bcbb9408294f555effc719, type: 3}
+  _maxUnitsInTeam: 5
+  _teamsCount: 4
+  _teamParent: {fileID: 9176934753294272724, guid: 17a81be2901b018488fe6dcff4ae37aa, type: 3}
+  _unitsParent: {fileID: 9176934753294272724, guid: 17a81be2901b018488fe6dcff4ae37aa, type: 3}
+  _spawningData:
+  - _spawnPoint: {x: 15, y: 1, z: 15}
+    _team: 0
+  - _spawnPoint: {x: 15, y: 1, z: -15}
+    _team: 1
+  - _spawnPoint: {x: -15, y: 1, z: 15}
+    _team: 2
+  - _spawnPoint: {x: -15, y: 1, z: -15}
+    _team: 3
+  _spawnSpreading: 5

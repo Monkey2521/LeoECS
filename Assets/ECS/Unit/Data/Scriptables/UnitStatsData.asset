@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8febd019424a51340806adab78536451, type: 3}
   m_Name: UnitStatsData
   m_EditorClassIdentifier: 
-  Speed: 2
-  Damage: 10
-  HealthPoints: 50
-  MaxHealthPoints: 50
-  BounceForce: 250
+  _speed: 2
+  _damage: 10
+  _healthPoints: 100
+  _maxHealthPoints: 100
+  _bounceForce: 250

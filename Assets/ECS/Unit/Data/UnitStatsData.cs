@@ -3,11 +3,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New unit stats data", menuName = "Static data/Unit/Stats data")]
 public sealed class UnitStatsData : ScriptableObject
 {
-    public int Speed;
-    public int Damage;
+    [SerializeField] int _speed;
+    [SerializeField] int _damage;
+    public int Speed => _speed;
+    public int Damage => _damage;
 
-    public int HealthPoints;
-    public int MaxHealthPoints;
+    [SerializeField] int _healthPoints;
+    [SerializeField] int _maxHealthPoints;
+    public int HP => _healthPoints;
+    public int MaxHP => _maxHealthPoints;
 
-    public int BounceForce;
+    [SerializeField] int _bounceForce;
+    public int BounceForce => _bounceForce;
 }

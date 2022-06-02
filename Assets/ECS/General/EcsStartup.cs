@@ -1,19 +1,21 @@
 using Leopotam.Ecs;
 using UnityEngine;
 
-namespace Client {
-    sealed class EcsStartup : MonoBehaviour {
+namespace Client 
+{
+    sealed class EcsStartup : MonoBehaviour 
+    {
         EcsWorld _world;
 
         EcsSystems _updateSystems;
         EcsSystems _fixedUpdateSystems;
 
         [Header("Unit settings")]
-        public UnitSpawningData unitSpawningData;
-        public UnitStatsData unitStatsData;
+        [SerializeField] UnitSpawningData unitSpawningData;
+        [SerializeField] UnitStatsData unitStatsData;
 
         [Header("Settings")]
-        public SceneData sceneData;
+        [SerializeField] SceneData sceneData;
 
         void Start () {          
             _world = new EcsWorld ();
@@ -34,6 +36,7 @@ namespace Client {
                         .Inject(sceneData);
 
             _fixedUpdateSystems
+                .Add(new IsGroundedCheckSystem())
                 .Add(new UnitMoveSystem())
                 .Add(new BounceSystem())
                 .Inject(sceneData);

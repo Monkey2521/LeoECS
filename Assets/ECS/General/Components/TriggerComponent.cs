@@ -1,6 +1,7 @@
 using UnityEngine;
 
-namespace Client {
+namespace Client 
+{
     struct TriggerComponent
     {
         public GameObject first;

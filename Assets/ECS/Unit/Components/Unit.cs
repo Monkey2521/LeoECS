@@ -1,7 +1,9 @@
 using UnityEngine;
 
-namespace Client {
-    struct Unit {
+namespace Client 
+{
+    struct Unit 
+    {
         public Transform transform;
 
         public Teams team;

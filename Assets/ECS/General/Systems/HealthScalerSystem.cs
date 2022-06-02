@@ -1,7 +1,8 @@
 using Leopotam.Ecs;
 using UnityEngine;
 
-namespace Client {
+namespace Client 
+{
     sealed class HealthScalerSystem : IEcsRunSystem
     { 
         EcsFilter<Scale, Health> _filter;

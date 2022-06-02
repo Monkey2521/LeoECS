@@ -1,6 +1,7 @@
 using UnityEngine;
 
-namespace Client {
+namespace Client 
+{
     struct CollisionComponent
     {
         public GameObject first;

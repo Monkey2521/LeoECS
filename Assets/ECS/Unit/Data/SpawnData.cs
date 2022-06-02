@@ -3,9 +3,11 @@ using UnityEngine;
 [System.Serializable]
 public class SpawnData
 {
-    public Vector3 SpawnPoint;
+    [SerializeField] Vector3 _spawnPoint;
+    public Vector3 SpawnPoint => _spawnPoint;
 
-    public Teams team;
+    [SerializeField] Teams _team;
+    public Teams Team => _team;
 }
 
 public enum Teams

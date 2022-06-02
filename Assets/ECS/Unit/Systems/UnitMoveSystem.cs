@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Client
 {
-    internal class UnitMoveSystem : IEcsRunSystem
+    public class UnitMoveSystem : IEcsRunSystem
     {
         EcsFilter<Unit, Moveable> _filter;
 
