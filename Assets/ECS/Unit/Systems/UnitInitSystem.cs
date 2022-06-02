@@ -69,8 +69,6 @@ namespace Client {
                     unitBounceable.force = _statsData.BounceForce;
 
                     unitMoveable.speed = _statsData.Speed;
-
-                    Debug.Log(unitScale.SetTransform(unit.transform));
                 }
             }
         }
