@@ -9,11 +9,3 @@ public class SpawnData
     [SerializeField] Teams _team;
     public Teams Team => _team;
 }
-
-public enum Teams
-{
-    Red,
-    Blue,
-    Green,
-    Yellow
-};

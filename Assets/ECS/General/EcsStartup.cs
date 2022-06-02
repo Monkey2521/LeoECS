@@ -31,14 +31,17 @@ namespace Client
             _updateSystems
                         .Add(new UnitInitSystem())
                         .Add(new HealthScalerSystem())
+                        .Add(new AttackSystem())
                         .Inject(unitSpawningData)
                         .Inject(unitStatsData)
                         .Inject(sceneData);
 
             _fixedUpdateSystems
                 .Add(new IsGroundedCheckSystem())
-                .Add(new UnitMoveSystem())
+                .Add(new NavigationSystem())
+                .Add(new RotationSystem())
                 .Add(new BounceSystem())
+                .Add(new UnitMoveSystem())
                 .Inject(sceneData);
 
             _updateSystems.Init();
