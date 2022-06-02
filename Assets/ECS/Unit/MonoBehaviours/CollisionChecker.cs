@@ -4,26 +4,25 @@ using UnityEngine;
 
 public class CollisionChecker : MonoBehaviour
 {
-        // auto-injected fields.
-        public EcsWorld ecsWorld { get; set; }
+    public EcsWorld ecsWorld { get; set; }
 
     private void OnCollisionEnter(Collision collision)
     {
         var hit = ecsWorld.NewEntity();
 
-        ref var hitComponent = ref hit.Get<HitComponent>();
+        ref var collisionComponent = ref hit.Get<CollisionComponent>();
 
-        hitComponent.first = transform.root.gameObject;
-        hitComponent.other = collision.gameObject;
+        collisionComponent.first = transform.root.gameObject;
+        collisionComponent.other = collision.gameObject;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         var hit = ecsWorld.NewEntity();
 
-        ref var hitComponent = ref hit.Get<HitComponent>();
+        ref var triggerComponent = ref hit.Get<TriggerComponent>();
 
-        hitComponent.first = transform.root.gameObject;
-        hitComponent.other = other.gameObject;
+        triggerComponent.first = transform.root.gameObject;
+        triggerComponent.other = other.gameObject;
     }
 }

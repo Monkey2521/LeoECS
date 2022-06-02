@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Client {
     sealed class BounceSystem : IEcsRunSystem {
 
-        EcsFilter<Bounce> _filter;
+        EcsFilter<Bounceable> _filter;
         SceneData _sceneData;
 
         void IEcsRunSystem.Run () {

@@ -25,7 +25,9 @@ namespace Client {
 
                     ref var unit = ref unitEntity.Get<Unit>();
                     ref var unitHealth = ref unitEntity.Get<Health>();
-                    ref var unitBounce = ref unitEntity.Get<Bounce>();
+                    ref var unitBounceable = ref unitEntity.Get<Bounceable>();
+                    ref var unitMoveable = ref unitEntity.Get<Moveable>();
+                    ref var unitScale = ref unitEntity.Get<Scale>();
 
                     GameObject unitGO = Object.Instantiate
                         (
@@ -35,9 +37,9 @@ namespace Client {
                             currentTeamParent
                         );
 
-                    unit.transform = unitGO.transform;
-                    unit.speed = _statsData.Speed;
+                    unitGO.GetComponent<CollisionChecker>().ecsWorld = _world;
 
+                    unit.transform = unitGO.transform;
                     unit.team = _spawnData.SpawningData[index].team;
                     unit.material = unitGO.GetComponent<MeshRenderer>().material;
 
@@ -63,8 +65,12 @@ namespace Client {
                     unitHealth.HP = _statsData.HealthPoints;
                     unitHealth.MaxHP = _statsData.MaxHealthPoints;
 
-                    unitBounce.rigidbody = unitGO.GetComponent<Rigidbody>();
-                    unitBounce.force = _statsData.BounceForce;
+                    unitBounceable.rigidbody = unitGO.GetComponent<Rigidbody>();
+                    unitBounceable.force = _statsData.BounceForce;
+
+                    unitMoveable.speed = _statsData.Speed;
+
+                    Debug.Log(unitScale.SetTransform(unit.transform));
                 }
             }
         }

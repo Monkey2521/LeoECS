@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Client
 {
-    struct Bounce
+    struct Bounceable
     {
         public Rigidbody rigidbody;
         public int force;
