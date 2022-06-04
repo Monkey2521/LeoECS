@@ -1,4 +1,5 @@
 using Leopotam.Ecs;
+using UnityEngine;
 
 namespace Client {
     sealed class CompressingSystem : IEcsRunSystem 
@@ -18,15 +19,18 @@ namespace Client {
                     compressing.IsCompressing = true;
                 }
 
-                scale.scale -= (compressing.FrameCount <= (int)(compressing.MaxFrame * 0.5f) ? 1 : -1) * 
-                    UnityEngine.Vector3.one * compressing.DeltaScale;
+                scale.scale -= new Vector3
+                    (
+                        0,
+                        (compressing.Timer <= (float)compressing.CompressionTime * 0.5f ? 1 : -1) * compressing.DeltaScale * Time.fixedDeltaTime,
+                        0f
+                    );
+                compressing.Timer += Time.fixedDeltaTime;
 
-                compressing.FrameCount++;
-
-                if (compressing.FrameCount >= compressing.MaxFrame)
+                if (compressing.Timer >= compressing.CompressionTime)
                 {
                     compressing.IsCompressing = false;
-                    compressing.FrameCount = 0;
+                    compressing.Timer = 0;
                 }
             }
         }

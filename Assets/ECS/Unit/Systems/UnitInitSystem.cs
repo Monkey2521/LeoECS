@@ -80,9 +80,9 @@ namespace Client
 
                     unitGrounded.SetTransform(unitGO.transform);
 
-                    unitCompressing.MaxFrame = _statsData.MaxCompressionFrames;
+                    unitCompressing.CompressionTime = _statsData.CompressionTime;
+                    unitCompressing.Timer = 0;
                     unitCompressing.DeltaScale = _statsData.CompressionDeltaScale;
-                    unitCompressing.FrameCount = 0;
                 }
             }
         }
