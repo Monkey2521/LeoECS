@@ -38,8 +38,9 @@ namespace Client
 
             _fixedUpdateSystems
                 .Add(new IsGroundedCheckSystem())
-                .Add(new NavigationSystem())
-                .Add(new RotationSystem())
+                .Add(new CompressingSystem())
+                .Add(new UnitNavigationSystem())
+                .Add(new UnitRotationSystem())
                 .Add(new BounceSystem())
                 .Add(new UnitMoveSystem())
                 .Inject(sceneData);

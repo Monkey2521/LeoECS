@@ -2,7 +2,7 @@ using Leopotam.Ecs;
 
 namespace Client 
 {
-    sealed class RotationSystem : IEcsRunSystem 
+    sealed class UnitNavigationSystem : IEcsRunSystem 
     {
         
         void IEcsRunSystem.Run () {

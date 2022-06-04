@@ -33,6 +33,7 @@ namespace Client
                     ref var unitGrounded = ref unitEntity.Get<IsGroundedComponent>();
                     ref var unitBounceable = ref unitEntity.Get<Bounceable>();
                     ref var unitMoveable = ref unitEntity.Get<Moveable>();
+                    ref var unitCompressing = ref unitEntity.Get<IsCompressingComponent>();
 
                     GameObject unitGO = Object.Instantiate
                         (
@@ -78,6 +79,10 @@ namespace Client
                     unitScale.SetTransform(unitGO.transform);
 
                     unitGrounded.SetTransform(unitGO.transform);
+
+                    unitCompressing.MaxFrame = _statsData.MaxCompressionFrames;
+                    unitCompressing.DeltaScale = _statsData.CompressionDeltaScale;
+                    unitCompressing.FrameCount = 0;
                 }
             }
         }
