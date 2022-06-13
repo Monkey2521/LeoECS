@@ -38,7 +38,6 @@ namespace Client
 
             _fixedUpdateSystems
                 .Add(new IsGroundedCheckSystem())
-                //.Add(new CompressingSystem())
                 .Add(new UnitNavigationSystem())
                 .Add(new UnitRotationSystem())
                 .Add(new BounceSystem())

@@ -46,9 +46,9 @@ namespace Client
 
                 ref var transform = ref _filter.Get3(i);
 
-                if (transform.transform != null)
+                if (transform.Transform != null)
                 {
-                    target = transform.transform;
+                    target = transform.Transform;
                     break;
                 }
             }

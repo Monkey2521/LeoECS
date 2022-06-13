@@ -28,14 +28,12 @@ namespace Client
                     EcsEntity unitEntity = _world.NewEntity();
 
                     ref var unit = ref unitEntity.Get<Unit>();
+                    ref var unitTransform = ref unitEntity.Get<TransformComponent>();
                     ref var unitHealth = ref unitEntity.Get<HealthComponent>();
-                    ref var unitScale = ref unitEntity.Get<ScaleComponent>();
                     ref var unitGrounded = ref unitEntity.Get<IsGroundedComponent>();
                     ref var unitBounceable = ref unitEntity.Get<Bounceable>();
                     ref var unitMoveable = ref unitEntity.Get<Moveable>();
-                    ref var unitTransform = ref unitEntity.Get<TransformComponent>();
                     ref var unitAttackable = ref unitEntity.Get<Attackable>();
-                    //ref var unitCompressing = ref unitEntity.Get<IsCompressingComponent>();
 
                     GameObject unitGO = Object.Instantiate
                         (
@@ -69,6 +67,8 @@ namespace Client
                             break;
                     }
 
+                    unitTransform.Transform = unitGO.transform;
+
                     unitHealth.HP = _statsData.HP;
                     unitHealth.MaxHP = _statsData.MaxHP;
 
@@ -76,19 +76,6 @@ namespace Client
                     unitBounceable.force = _statsData.BounceForce;
 
                     unitMoveable.speed = _statsData.Speed;
-                    unitMoveable.SetTransform(unitGO.transform);
-
-                    unitScale.SetTransform(unitGO.transform);
-
-                    unitGrounded.SetTransform(unitGO.transform);
-
-                    unitTransform.transform = unitGO.transform;
-
-                    /*
-                    unitCompressing.CompressionTime = _statsData.CompressionTime;
-                    unitCompressing.Timer = 0;
-                    unitCompressing.DeltaScale = _statsData.CompressionDeltaScale;
-                    */
                 }
             }
         }

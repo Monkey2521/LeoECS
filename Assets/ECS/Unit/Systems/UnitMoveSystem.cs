@@ -5,21 +5,18 @@ namespace Client
 {
     public class UnitMoveSystem : IEcsRunSystem
     {
-        EcsFilter<Unit, Moveable> _filter;
+        EcsFilter<Unit, Moveable, TransformComponent> _filter;
 
         public void Run()
         {
             foreach (var i in _filter)
             {
-                ref var unitMoveable = ref _filter.Get2(i);
+                ref var unit = ref _filter.Get2(i);
+                ref var transform = ref _filter.Get3(i);
 
-                ref var entity = ref _filter.GetEntity(i);
-                //ref var compressing = ref _filter.Get3(i);
-
-                Vector3 direction = unitMoveable.transform.TransformDirection(Vector3.forward) * unitMoveable.speed;
+                Vector3 direction = transform.Transform.TransformDirection(Vector3.forward) * unit.speed;
                
-                //if (!compressing.IsCompressing)
-                unitMoveable.Position += direction * Time.fixedDeltaTime;
+                transform.Position += direction * Time.fixedDeltaTime;
             }
         }
     }

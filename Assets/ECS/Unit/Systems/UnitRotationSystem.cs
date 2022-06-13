@@ -1,4 +1,5 @@
 using Leopotam.Ecs;
+using UnityEngine;
 
 namespace Client 
 {
@@ -15,7 +16,7 @@ namespace Client
 
                 if (attackable.Target != null)
                 {
-                    transform.transform.LookAt(attackable.Target);
+                    transform.Transform.LookAt(attackable.Target);
                 }
             }
         }

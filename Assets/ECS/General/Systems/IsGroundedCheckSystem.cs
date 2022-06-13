@@ -7,14 +7,15 @@ namespace Client
     {
         SceneData _sceneData;
 
-        EcsFilter<IsGroundedComponent> _filter;
+        EcsFilter<IsGroundedComponent, TransformComponent> _filter;
         
         void IEcsRunSystem.Run () {
             foreach (var i in _filter)
             {
                 ref var isGrounded = ref _filter.Get1(i);
+                ref var transform = ref _filter.Get2(i);
 
-                isGrounded.grounded = OnGround(isGrounded.Position, isGrounded.XScale);
+                isGrounded.grounded = OnGround(transform.Position, transform.scale.y);
             }
         }
 
