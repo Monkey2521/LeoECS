@@ -17,5 +17,5 @@ MonoBehaviour:
   _healthPoints: 100
   _maxHealthPoints: 100
   _bounceForce: 250
-  _compressionTime: 0.8
+  _compressionTime: 0.4
   _compressionDeltaScale: 0.2
