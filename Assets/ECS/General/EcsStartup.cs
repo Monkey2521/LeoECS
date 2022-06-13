@@ -38,11 +38,14 @@ namespace Client
 
             _fixedUpdateSystems
                 .Add(new IsGroundedCheckSystem())
+                .Add(new UnitCompressionSystem())
+                .Add(new CompressionSystem())
                 .Add(new UnitNavigationSystem())
                 .Add(new UnitRotationSystem())
                 .Add(new BounceSystem())
                 .Add(new UnitMoveSystem())
-                .Inject(sceneData);
+                .Inject(sceneData)
+                .Inject(unitStatsData);
 
             _updateSystems.Init();
             _fixedUpdateSystems.Init();

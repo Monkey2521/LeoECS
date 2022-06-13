@@ -34,6 +34,8 @@ namespace Client
                     ref var unitBounceable = ref unitEntity.Get<Bounceable>();
                     ref var unitMoveable = ref unitEntity.Get<Moveable>();
                     ref var unitAttackable = ref unitEntity.Get<Attackable>();
+                    ref var unitCompression = ref unitEntity.Get<IsCompressingComponent>();
+                    ref var unitCompressionChecker = ref unitEntity.Get<CompressionCheckerComponent>();
 
                     GameObject unitGO = Object.Instantiate
                         (
@@ -76,6 +78,12 @@ namespace Client
                     unitBounceable.force = _statsData.BounceForce;
 
                     unitMoveable.speed = _statsData.Speed;
+
+                    unitCompression.Timer = 0;
+                    unitCompression.IsCompressing = false;
+
+                    unitCompressionChecker.CurrentGrounded = true;
+                    unitCompressionChecker.PreviousGrounded = true;
                 }
             }
         }
