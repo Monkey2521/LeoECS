@@ -11,10 +11,10 @@ namespace Client
         {
             foreach (var i in _filter)
             {
-                ref var unit = ref _filter.Get2(i);
+                ref var moveable = ref _filter.Get2(i);
                 ref var transform = ref _filter.Get3(i);
 
-                Vector3 direction = transform.Transform.TransformDirection(Vector3.forward) * unit.speed;
+                Vector3 direction = transform.Transform.TransformDirection(Vector3.forward) * moveable.speed;
                
                 transform.Position += direction * Time.fixedDeltaTime;
             }

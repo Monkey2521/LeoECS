@@ -31,7 +31,7 @@ namespace Client
             _updateSystems
                         .Add(new UnitInitSystem())
                         .Add(new HealthScalerSystem())
-                        .Add(new AttackSystem())
+                        .Add(new UnitAttackSystem())
                         .Inject(unitSpawningData)
                         .Inject(unitStatsData)
                         .Inject(sceneData);
