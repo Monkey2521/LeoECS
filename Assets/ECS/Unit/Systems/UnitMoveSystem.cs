@@ -5,7 +5,7 @@ namespace Client
 {
     public class UnitMoveSystem : IEcsRunSystem
     {
-        EcsFilter<Unit, Moveable, IsCompressingComponent> _filter;
+        EcsFilter<Unit, Moveable> _filter;
 
         public void Run()
         {
@@ -14,10 +14,11 @@ namespace Client
                 ref var unitMoveable = ref _filter.Get2(i);
 
                 ref var entity = ref _filter.GetEntity(i);
-                ref var compressing = ref _filter.Get3(i);
+                //ref var compressing = ref _filter.Get3(i);
 
                 Vector3 direction = unitMoveable.transform.TransformDirection(Vector3.forward) * unitMoveable.speed;
-                if (!compressing.IsCompressing)
+               
+                //if (!compressing.IsCompressing)
                 unitMoveable.Position += direction * Time.fixedDeltaTime;
             }
         }

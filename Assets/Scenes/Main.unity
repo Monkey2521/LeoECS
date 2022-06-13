@@ -420,6 +420,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arena
       objectReference: {fileID: 0}
+    - target: {fileID: 7295863139599745922, guid: ef477e90a59afaa45bb8ffcfd34f4505, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 7295863139599745925, guid: ef477e90a59afaa45bb8ffcfd34f4505, type: 3}
       propertyPath: m_Convex
       value: 0
