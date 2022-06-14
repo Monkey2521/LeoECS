@@ -4,7 +4,9 @@ using UnityEngine;
 namespace Client 
 {
     sealed class HealthScalerSystem : IEcsRunSystem
-    { 
+    {
+        EcsWorld _world;
+
         EcsFilter<TransformComponent, HealthComponent, IsCompressingComponent> _filter;
 
         void IEcsRunSystem.Run()
@@ -20,6 +22,11 @@ namespace Client
 
                     if (multiplier > 0)
                         scale.scale = Vector3.one * multiplier;
+                    if (health.HP <= 0)
+                    {
+                        EcsEntity entity = _filter.GetEntity(i);
+                        entity.Destroy();
+                    }
                 }
             }
         }

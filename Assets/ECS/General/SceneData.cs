@@ -4,5 +4,6 @@ using Leopotam.Ecs;
 public class SceneData : MonoBehaviour
 {
     public float RayDistance;
-    public LayerMask Layer;
+    public LayerMask GroundLayer;
+    public LayerMask AttackableLayer;
 }

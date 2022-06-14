@@ -25,7 +25,7 @@ namespace Client
                 position,
                 Vector3.down,
                 _sceneData.RayDistance * scale,
-                _sceneData.Layer);
+                _sceneData.GroundLayer);
         }
     }
 }

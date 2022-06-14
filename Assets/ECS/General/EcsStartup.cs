@@ -30,10 +30,12 @@ namespace Client
 
             _updateSystems
                         .Add(new UnitInitSystem())
-                        .Add(new HealthScalerSystem())
+                        .Add(new UnitAttackCheckSystem())
                         .Add(new UnitAttackSystem())
                         .Add(new UnitCloneSystem())
-                        .Add(new TestHealthSystem())
+                        .Add(new HealthScalerSystem())
+                        //.Add(new TestHealthSystem())
+                        .OneFrame<CollisionComponent>()
                         .Inject(unitSpawningData)
                         .Inject(unitStatsData)
                         .Inject(sceneData);

@@ -34,6 +34,7 @@ namespace Client
                     ref var unitBounceable = ref unitEntity.Get<Bounceable>();
                     ref var unitMoveable = ref unitEntity.Get<Moveable>();
                     ref var unitAttackable = ref unitEntity.Get<Attackable>();
+                    ref var unitIsAttacking = ref unitEntity.Get<IsAttackingComponent>();
                     ref var unitCompression = ref unitEntity.Get<IsCompressingComponent>();
                     ref var unitCompressionChecker = ref unitEntity.Get<CompressionCheckerComponent>();
 
@@ -45,7 +46,7 @@ namespace Client
                             currentTeamParent
                         );
 
-                    unitGO.GetComponent<CollisionChecker>().ecsWorld = _world;
+                    unitGO.GetComponent<CollisionChecker>().entity = unitEntity;
 
                     unit.team = _spawnData.SpawningData[index].Team;
                     unit.material = unitGO.GetComponent<MeshRenderer>().material;
@@ -79,6 +80,12 @@ namespace Client
                     unitBounceable.force = _statsData.BounceForce;
 
                     unitMoveable.speed = _statsData.Speed;
+
+                    unitAttackable.Target = null;
+                    unitAttackable.Damage = _statsData.Damage;
+                    unitAttackable.AttackTime = _statsData.AttackTime;
+                    unitAttackable.Timer = 0f;
+                    unitIsAttacking.IsAttacking = false;
 
                     unitCompression.Timer = 0;
                     unitCompression.IsCompressing = false;

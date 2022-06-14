@@ -4,9 +4,12 @@ using UnityEngine;
 public sealed class UnitStatsData : ScriptableObject
 {
     [SerializeField][Range(1, 60)] int _speed;
-    [SerializeField][Range(1, 60)] int _damage;
     public int Speed => _speed;
+
+    [SerializeField][Range(1, 60)] int _damage;
+    [SerializeField][Range(0.0001f, 5f)] float _attackTime;
     public int Damage => _damage;
+    public float AttackTime => _attackTime;
 
     [SerializeField][Range(1, 1000)] int _healthPoints;
     [SerializeField][Range(1, 1000)] int _maxHealthPoints;
@@ -17,7 +20,7 @@ public sealed class UnitStatsData : ScriptableObject
     public int BounceForce => _bounceForce;
 
     [SerializeField][Range(0f, 2f)] float _compressionTime;
-    [SerializeField][Range(0f, 0.2f)] float _compressionDeltaScale;
+    [SerializeField][Range(0f, 0.5f)] float _compressionDeltaScale;
     public float CompressionTime => _compressionTime;
     public float CompressionDeltaScale => _compressionDeltaScale;
 }
