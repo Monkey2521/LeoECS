@@ -25,12 +25,17 @@ namespace Client
 
                     ref var transform = ref _filter.Get2(i);
 
-                    transform.scale += (compression.Timer >= _data.CompressionTime * 0.5f ? 1 : -1) * new Vector3
+                    float deltaXZ = _data.CompressionDeltaScale * Time.fixedDeltaTime;
+                    float deltaY = deltaXZ * 2;
+                    int timeMultiplier = (compression.Timer >= _data.CompressionTime * 0.5f ? 1 : -1);
+
+                    transform.scale += new Vector3
                         (
-                            0f,
-                            _data.CompressionDeltaScale * Time.fixedDeltaTime * 2,
-                            0f
+                            deltaXZ * (-timeMultiplier),
+                            deltaY * timeMultiplier,
+                            deltaXZ * (-timeMultiplier)
                         );
+
                     compression.Timer += Time.fixedDeltaTime;
                 }
             }

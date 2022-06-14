@@ -1,33 +1,29 @@
 using Leopotam.Ecs;
 using UnityEngine;
 
-namespace Client 
-{
-    sealed class UnitInitSystem : IEcsInitSystem 
+namespace Client {
+    sealed class UnitCloneSystem : IEcsRunSystem 
     {
         readonly EcsWorld _world = null;
+
+        EcsFilter<Unit, HealthComponent> _filter;
 
         UnitSpawningData _spawnData;
         UnitStatsData _statsData;
 
-        public void Init() {
-            Transform unitsParent = Object.Instantiate(_spawnData.UnitsParent).transform;
-            unitsParent.name = "Units";
-
-            for (int index = 0; index < _spawnData.TeamsCount; index++)
+        void IEcsRunSystem.Run () {
+            foreach(var i in _filter)
             {
-                Transform currentTeamParent = Object.Instantiate
-                    (
-                        _spawnData.TeamParent,
-                        unitsParent
-                    ).transform;
-                currentTeamParent.name = _spawnData.SpawningData[index].Team.ToString() + " team";
+                ref var unit = ref _filter.Get1(i);
+                ref var health = ref _filter.Get2(i);
 
-                for (int i = 0; i < _spawnData.MaxUnitsInTeam; i++)
+                if (health.HP * 0.5f >= health.MaxHP)
                 {
+                    health.HP = health.MaxHP;
+
                     EcsEntity unitEntity = _world.NewEntity();
 
-                    ref var unit = ref unitEntity.Get<Unit>();
+                    ref var newUnit = ref unitEntity.Get<Unit>();
                     ref var unitTransform = ref unitEntity.Get<TransformComponent>();
                     ref var unitHealth = ref unitEntity.Get<HealthComponent>();
                     ref var unitGrounded = ref unitEntity.Get<IsGroundedComponent>();
@@ -40,30 +36,30 @@ namespace Client
                     GameObject unitGO = Object.Instantiate
                         (
                             _spawnData.UnitPrefab,
-                            GetNearbyPosition(_spawnData.SpawningData[index].SpawnPoint),
+                            unit.gameObject.transform.position,
                             Quaternion.identity,
-                            currentTeamParent
+                            unit.gameObject.transform.parent
                         );
 
                     unitGO.GetComponent<CollisionChecker>().ecsWorld = _world;
 
-                    unit.team = _spawnData.SpawningData[index].Team;
-                    unit.material = unitGO.GetComponent<MeshRenderer>().material;
-                    unit.gameObject = unitGO;
+                    newUnit.team = unit.team;
+                    newUnit.material = unitGO.GetComponent<MeshRenderer>().material;
+                    newUnit.gameObject = unitGO;
 
-                    switch (index) 
+                    switch (newUnit.team)
                     {
-                        case (int)Teams.Red:
-                            unit.material.color = Color.red;
+                        case Teams.Red:
+                            newUnit.material.color = Color.red;
                             break;
-                        case (int)Teams.Blue:
-                            unit.material.color = Color.blue;
+                        case Teams.Blue:
+                            newUnit.material.color = Color.blue;
                             break;
-                        case (int)Teams.Green:
-                            unit.material.color = Color.green;
+                        case Teams.Green:
+                            newUnit.material.color = Color.green;
                             break;
-                        case (int)Teams.Yellow:
-                            unit.material.color = Color.yellow;
+                        case Teams.Yellow:
+                            newUnit.material.color = Color.yellow;
                             break;
                         default:
                             Debug.Log("Something is going wrong");
@@ -87,16 +83,6 @@ namespace Client
                     unitCompressionChecker.PreviousGrounded = true;
                 }
             }
-        }
-
-        Vector3 GetNearbyPosition(Vector3 position)
-        {
-            return position + new Vector3
-                (
-                    Random.Range(-_spawnData.SpawnSpreading, _spawnData.SpawnSpreading),
-                    0f,
-                    Random.Range(-_spawnData.SpawnSpreading, _spawnData.SpawnSpreading)
-                );
         }
     }
 }

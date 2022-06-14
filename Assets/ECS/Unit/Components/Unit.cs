@@ -6,5 +6,7 @@ namespace Client
     {
         public Teams team;
         public Material material;
+
+        public GameObject gameObject;
     }
 }

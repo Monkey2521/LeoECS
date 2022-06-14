@@ -32,6 +32,8 @@ namespace Client
                         .Add(new UnitInitSystem())
                         .Add(new HealthScalerSystem())
                         .Add(new UnitAttackSystem())
+                        .Add(new UnitCloneSystem())
+                        .Add(new TestHealthSystem())
                         .Inject(unitSpawningData)
                         .Inject(unitStatsData)
                         .Inject(sceneData);
