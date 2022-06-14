@@ -10,7 +10,7 @@ namespace Client {
         {
             foreach(var i in _filter)
             {
-                if (_frameCount >= 9)
+                if (_frameCount >= 29)
                 {
                     ref var health = ref _filter.Get2(i);
 

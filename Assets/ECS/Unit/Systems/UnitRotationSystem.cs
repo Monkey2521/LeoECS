@@ -12,11 +12,19 @@ namespace Client
             foreach (var i in _filter)
             {
                 ref var attackable = ref _filter.Get2(i);
-                ref var transform = ref _filter.Get3(i);
 
                 if (attackable.Target != null)
                 {
-                    transform.Transform.LookAt(attackable.Target);
+                    ref var transform = ref _filter.Get3(i);
+
+                    Vector3 targetPos = new Vector3
+                        (
+                            attackable.Target.position.x,
+                            transform.Position.y,
+                            attackable.Target.position.z
+                        );
+
+                    transform.Transform.LookAt(targetPos);
                 }
             }
         }
