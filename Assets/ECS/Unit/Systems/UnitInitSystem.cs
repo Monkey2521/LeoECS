@@ -29,22 +29,15 @@ namespace Client
 
                     ref var unit = ref unitEntity.Get<Unit>();
                     ref var unitTransform = ref unitEntity.Get<TransformComponent>();
-                    ref var unitHealth = ref unitEntity.Get<HealthComponent>();
-                    ref var unitGrounded = ref unitEntity.Get<IsGroundedComponent>();
-                    ref var unitBounceable = ref unitEntity.Get<Bounceable>();
-                    ref var unitMoveable = ref unitEntity.Get<Moveable>();
-                    ref var unitAttackable = ref unitEntity.Get<Attackable>();
-                    ref var unitIsAttacking = ref unitEntity.Get<IsAttackingComponent>();
-                    ref var unitCompression = ref unitEntity.Get<IsCompressingComponent>();
-                    ref var unitCompressionChecker = ref unitEntity.Get<CompressionCheckerComponent>();
+                    ref var unitInit = ref unitEntity.Get<INeedInitializationComponent>();
 
                     GameObject unitGO = Object.Instantiate
-                        (
-                            _spawnData.UnitPrefab,
-                            GetNearbyPosition(_spawnData.SpawningData[index].SpawnPoint),
-                            Quaternion.identity,
-                            currentTeamParent
-                        );
+                    (
+                        _spawnData.UnitPrefab,
+                        GetNearbyPosition(_spawnData.SpawningData[index].SpawnPoint),
+                        Quaternion.identity,
+                        currentTeamParent
+                    );
 
                     unitGO.GetComponent<CollisionChecker>().entity = unitEntity;
 
@@ -52,46 +45,7 @@ namespace Client
                     unit.material = unitGO.GetComponent<MeshRenderer>().material;
                     unit.gameObject = unitGO;
 
-                    switch (index) 
-                    {
-                        case (int)Teams.Red:
-                            unit.material.color = Color.red;
-                            break;
-                        case (int)Teams.Blue:
-                            unit.material.color = Color.blue;
-                            break;
-                        case (int)Teams.Green:
-                            unit.material.color = Color.green;
-                            break;
-                        case (int)Teams.Yellow:
-                            unit.material.color = Color.yellow;
-                            break;
-                        default:
-                            Debug.Log("Something is going wrong");
-                            break;
-                    }
-
                     unitTransform.Transform = unitGO.transform;
-
-                    unitHealth.HP = _statsData.HP;
-                    unitHealth.MaxHP = _statsData.MaxHP;
-
-                    unitBounceable.rigidbody = unitGO.GetComponent<Rigidbody>();
-                    unitBounceable.force = _statsData.BounceForce;
-
-                    unitMoveable.speed = _statsData.Speed;
-
-                    unitAttackable.Target = null;
-                    unitAttackable.Damage = _statsData.Damage;
-                    unitAttackable.AttackTime = _statsData.AttackTime;
-                    unitAttackable.Timer = 0f;
-                    unitIsAttacking.IsAttacking = false;
-
-                    unitCompression.Timer = 0;
-                    unitCompression.IsCompressing = false;
-
-                    unitCompressionChecker.CurrentGrounded = true;
-                    unitCompressionChecker.PreviousGrounded = true;
                 }
             }
         }

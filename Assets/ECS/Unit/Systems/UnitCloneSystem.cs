@@ -9,7 +9,6 @@ namespace Client {
         EcsFilter<Unit, HealthComponent> _filter;
 
         UnitSpawningData _spawnData;
-        UnitStatsData _statsData;
 
         void IEcsRunSystem.Run () {
             foreach(var i in _filter)
@@ -25,14 +24,7 @@ namespace Client {
 
                     ref var newUnit = ref unitEntity.Get<Unit>();
                     ref var unitTransform = ref unitEntity.Get<TransformComponent>();
-                    ref var unitHealth = ref unitEntity.Get<HealthComponent>();
-                    ref var unitGrounded = ref unitEntity.Get<IsGroundedComponent>();
-                    ref var unitBounceable = ref unitEntity.Get<Bounceable>();
-                    ref var unitMoveable = ref unitEntity.Get<Moveable>();
-                    ref var unitAttackable = ref unitEntity.Get<Attackable>();
-                    ref var unitIsAttacking = ref unitEntity.Get<IsAttackingComponent>();
-                    ref var unitCompression = ref unitEntity.Get<IsCompressingComponent>();
-                    ref var unitCompressionChecker = ref unitEntity.Get<CompressionCheckerComponent>();
+                    ref var unitInit = ref unitEntity.Get<INeedInitializationComponent>();
 
                     GameObject unitGO = Object.Instantiate
                         (
@@ -48,45 +40,7 @@ namespace Client {
                     newUnit.material = unitGO.GetComponent<MeshRenderer>().material;
                     newUnit.gameObject = unitGO;
 
-                    switch (newUnit.team)
-                    {
-                        case Teams.Red:
-                            newUnit.material.color = Color.red;
-                            break;
-                        case Teams.Blue:
-                            newUnit.material.color = Color.blue;
-                            break;
-                        case Teams.Green:
-                            newUnit.material.color = Color.green;
-                            break;
-                        case Teams.Yellow:
-                            newUnit.material.color = Color.yellow;
-                            break;
-                        default:
-                            Debug.Log("Something is going wrong");
-                            break;
-                    }
-
                     unitTransform.Transform = unitGO.transform;
-
-                    unitHealth.HP = _statsData.HP;
-                    unitHealth.MaxHP = _statsData.MaxHP;
-
-                    unitBounceable.rigidbody = unitGO.GetComponent<Rigidbody>();
-                    unitBounceable.force = _statsData.BounceForce;
-
-                    unitMoveable.speed = _statsData.Speed;
-
-                    unitAttackable.Target = null;
-                    unitAttackable.Damage = _statsData.Damage;
-                    unitAttackable.AttackTime = _statsData.AttackTime;
-                    unitIsAttacking.IsAttacking = false;
-
-                    unitCompression.Timer = 0;
-                    unitCompression.IsCompressing = false;
-
-                    unitCompressionChecker.CurrentGrounded = true;
-                    unitCompressionChecker.PreviousGrounded = true;
                 }
             }
         }
