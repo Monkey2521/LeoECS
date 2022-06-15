@@ -24,7 +24,7 @@ namespace Client {
 
                     ref var newUnit = ref unitEntity.Get<Unit>();
                     ref var unitTransform = ref unitEntity.Get<TransformComponent>();
-                    ref var unitInit = ref unitEntity.Get<INeedInitializationComponent>();
+                    ref var unitInit = ref unitEntity.Get<INeedInitializationFlag>();
 
                     GameObject unitGO = Object.Instantiate
                         (

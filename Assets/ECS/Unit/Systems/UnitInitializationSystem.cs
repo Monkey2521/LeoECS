@@ -5,7 +5,7 @@ namespace Client
 {
     sealed class UnitInitializationSystem : IEcsRunSystem 
     {
-        EcsFilter<Unit, INeedInitializationComponent> _filter;
+        EcsFilter<Unit, INeedInitializationFlag> _filter;
 
         UnitStatsData _statsData;
 

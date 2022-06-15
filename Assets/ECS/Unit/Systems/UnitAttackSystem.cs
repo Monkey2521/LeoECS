@@ -20,7 +20,6 @@ namespace Client
 
                 if (_filter.Get3(i).IsAttacking)
                 {
-
                     if (attackable.Timer <= 0)
                     {
                         ref var targetHealth = ref attackable.Target.gameObject.GetComponent<CollisionChecker>().

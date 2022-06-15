@@ -1,4 +1,0 @@
-namespace Client 
-{
-    struct INeedInitializationComponent { }
-}

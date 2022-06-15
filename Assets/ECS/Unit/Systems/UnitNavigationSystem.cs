@@ -17,6 +17,9 @@ namespace Client
                 ref var unit = ref _filter.Get1(i);
                 ref var attackable = ref _filter.Get2(i);
 
+                if (attackable.Target != null)
+                    continue;
+
                 if (teamsTargets.TryGetValue(unit.team, out Transform target))
                 {
                     attackable.Target = target;
