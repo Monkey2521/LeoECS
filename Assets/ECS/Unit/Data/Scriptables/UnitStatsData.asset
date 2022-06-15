@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: UnitStatsData
   m_EditorClassIdentifier: 
   _speed: 2
-  _damage: 10
+  _damage: 5
+  _attackTime: 0.1
   _healthPoints: 100
   _maxHealthPoints: 100
   _bounceForce: 250
