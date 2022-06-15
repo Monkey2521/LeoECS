@@ -35,6 +35,7 @@ namespace Client
                         .Add(new UnitAttackCheckSystem())
                         .Add(new UnitAttackSystem())
                         .Add(new HealthScalerSystem())
+                        .Add(new UnitHealthDestroySystem())
                         //.Add(new TestHealthSystem())
                         .OneFrame<CollisionComponent>()
                         .OneFrame<INeedInitializationComponent>()

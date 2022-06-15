@@ -22,11 +22,6 @@ namespace Client
 
                     if (multiplier > 0)
                         scale.scale = Vector3.one * multiplier;
-                    if (health.HP <= 0)
-                    {
-                        EcsEntity entity = _filter.GetEntity(i);
-                        entity.Destroy();
-                    }
                 }
             }
         }
