@@ -3,12 +3,11 @@ using UnityEngine;
 
 namespace Client 
 {
-    sealed class UnitInitSystem : IEcsInitSystem 
+    sealed class UnitStartSystem : IEcsInitSystem 
     {
         readonly EcsWorld _world = null;
 
         UnitSpawningData _spawnData;
-        UnitStatsData _statsData;
 
         public void Init() {
             Transform unitsParent = Object.Instantiate(_spawnData.UnitsParent).transform;

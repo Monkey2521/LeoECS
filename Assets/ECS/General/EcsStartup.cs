@@ -29,17 +29,18 @@ namespace Client
             #endif
 
             _updateSystems
-                        .Add(new UnitInitSystem())
+                        .Add(new UnitStartSystem())
                         .Add(new UnitCloneSystem())
                         .Add(new UnitInitializationSystem())
                         .Add(new UnitNavigationSystem())
                         .Add(new UnitAttackCheckSystem())
                         .Add(new UnitAttackSystem())
                         .Add(new HealthScalerSystem())
-                        .Add(new UnitHealthDestroySystem())
+                        .Add(new UnitDestroySystem())
                         //.Add(new TestHealthSystem())
                         .OneFrame<CollisionComponent>()
                         .OneFrame<INeedInitializationFlag>()
+                        .OneFrame<IDestroyFlag>()
                         .Inject(unitSpawningData)
                         .Inject(unitStatsData)
                         .Inject(sceneData);

@@ -22,6 +22,8 @@ namespace Client
 
                     if (multiplier > 0)
                         scale.scale = Vector3.one * multiplier;
+                    else
+                        _filter.GetEntity(i).Get<IDestroyFlag>();
                 }
             }
         }
